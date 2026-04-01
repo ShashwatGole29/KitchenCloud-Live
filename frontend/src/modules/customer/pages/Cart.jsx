@@ -258,7 +258,8 @@ const Cart = () => {
 
         // 1. Create Order via .NET Microservice
         // NOTE: Ensure your .NET service handles CORS for this origin
-        const response = await fetch('http://localhost:5000/api/payment/create-order', {
+        const paymentApiUrl = import.meta.env.VITE_PAYMENT_URL || 'http://localhost:5000/api/payment';
+        const response = await fetch(`${paymentApiUrl}/create-order`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ amount: finalTotal })
@@ -277,7 +278,8 @@ const Cart = () => {
           order_id: orderId,
           handler: async function (response) {
             try {
-              const verifyResponse = await fetch('http://localhost:5000/api/payment/verify-payment', {
+              const paymentApiUrl = import.meta.env.VITE_PAYMENT_URL || 'http://localhost:5000/api/payment';
+              const verifyResponse = await fetch(`${paymentApiUrl}/verify-payment`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

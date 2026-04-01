@@ -424,9 +424,10 @@ export const AppProvider = ({ children }) => {
             if (!path.startsWith('images/') && !path.startsWith('uploads/')) {
                 path = `images/${path}`;
             }
-
-            return `http://localhost:8080/${path}`;
+            const baseUrl = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:8080';
+            return `${baseUrl}/${path}`;
         }
+
     }}>
         {children}
     </AppContext.Provider>);

@@ -25,7 +25,8 @@ const DashboardOverview = () => {
                 const token = localStorage.getItem('token');
                 const headers = { "Authorization": `Bearer ${token}` };
 
-                const statsResponse = await fetch("http://localhost:8080/api/admin/stats", { headers });
+                const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
+                const statsResponse = await fetch(`${apiUrl}/admin/stats`, { headers });
                 if (statsResponse.ok) {
                     const data = await statsResponse.json();
                     setStats([
@@ -76,7 +77,7 @@ const DashboardOverview = () => {
                 }
 
                 // Fetch Recent Orders
-                const ordersResponse = await fetch("http://localhost:8080/api/admin/orders/recent", { headers });
+                const ordersResponse = await fetch(`${apiUrl}/admin/orders/recent`, { headers });
                 if (ordersResponse.ok) {
                     const data = await ordersResponse.json();
                     setRecentOrders(data.map(order => ({

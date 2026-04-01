@@ -14,7 +14,8 @@ const AnalyticsDashboard = () => {
         const fetchStats = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const res = await fetch("http://localhost:8080/api/admin/stats", {
+                const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
+                const res = await fetch(`${apiUrl}/admin/stats`, {
                     headers: { "Authorization": `Bearer ${token}` }
                 });
                 if (res.ok) {
