@@ -12,10 +12,8 @@ dist/
 target/
 *.class
 *.jar
-application.properties
 
 # --- Server-Payment (C#/.NET) ---
 bin/
 obj/
-appsettings.json
 appsettings.Development.json
